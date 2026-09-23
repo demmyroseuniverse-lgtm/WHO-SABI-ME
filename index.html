@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#6d28d9">
+  <meta name="description" content="WHO SABI ME? — a social quiz, memories and community app.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>WHO SABI ME? — v35</title>
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <button class="brand-btn" data-go="home" aria-label="Home"><span class="brand-mark">W</span><span><b>WHO SABI ME?</b><small>Who really knows you?</small></span></button>
+    <div class="top-actions">
+      <button class="round-btn" id="searchBtn" aria-label="Search">⌕</button>
+      <button class="round-btn" id="notifyBtn" aria-label="Notifications">♡<i id="notifyDot"></i></button><button class="round-btn" id="messageBtn" aria-label="Messages">◌<i id="messageDot"></i></button>
+      <button class="round-btn" id="shareAppBtn" aria-label="Share">↗</button><button class="round-btn" id="accountBtn" aria-label="Account">◎<i id="liveDot" title="Live connection"></i></button>
+    </div>
+  </header>
+
+  <main id="app">
+    <section id="home" class="screen active">
+      <div class="welcome-row">
+        <div><span class="eyebrow">YOUR COMMUNITY</span><h1>See what's happening.</h1></div>
+        <button class="avatar-button" id="homeAvatar" data-go="profile"></button>
+      </div>
+      <div id="stories" class="stories"></div><div class="ad-wrap" data-ad-slot="top"><span>Advertisement</span><div class="ad-slot" id="ad-top"></div></div>
+      <div class="feed-tabs"><button class="active" data-feed="forYou">For You</button><button data-feed="following">Following</button><button data-feed="quiz">Quiz Buzz</button></div>
+      <div id="homeFeed" class="feed"></div><div class="ad-wrap" data-ad-slot="feed"><span>Advertisement</span><div class="ad-slot" id="ad-feed"></div></div>
+    </section>
+
+    <section id="discover" class="screen">
+      <div class="page-title"><span class="eyebrow">EXPLORE</span><h1>Discover</h1><p>Find people, quizzes and throwback memories.</p></div>
+      <div class="search-box"><span>⌕</span><input id="searchInput" placeholder="Search people or usernames" autocomplete="off"></div>
+      <div class="discover-tabs"><button class="active" data-discover="people">People</button><button data-discover="memories">Memories</button><button data-discover="quiz">Quizzes</button></div>
+      <div id="discoverList"></div><div class="ad-wrap" data-ad-slot="discover"><span>Advertisement</span><div class="ad-slot" id="ad-discover"></div></div>
+    </section>
+
+    <section id="create" class="screen">
+      <div class="page-title"><span class="eyebrow">CREATE</span><h1>Make your profile</h1><p>Set up your identity, then build your WHO SABI ME? quiz.</p></div>
+      <div class="card form-card">
+        <div class="avatar-upload"><button id="profileAvatarBtn" class="avatar avatar-large">+</button><div><b>Profile photo</b><small>Optional • stays on this device</small><input id="profileAvatar" type="file" accept="image/*" hidden></div></div>
+        <label>Username<input id="username" maxlength="24" placeholder="e.g. ademola" autocomplete="off"></label>
+        <label>Display name<input id="displayName" maxlength="40" placeholder="Your name"></label>
+        <label>Bio<textarea id="bio" maxlength="160" placeholder="Tell people a little about you..."></textarea></label>
+        <div class="divider"><span>10-question quiz</span></div>
+        <div id="questions"></div>
+        <button class="primary full" id="createBtn">Save profile & create quiz</button>
+        <p class="small muted">v9 keeps your data on this browser. A cloud backend can be connected for real multi-user accounts.</p>
+      </div>
+    </section>
+
+    <section id="join" class="screen"><div id="quizMount"></div></section>
+
+    <section id="profile" class="screen"><div id="profileMount"></div></section>
+
+    <section id="memory" class="screen">
+      <div class="page-title"><span class="eyebrow">MEMORIES</span><h1>Throwbacks</h1><p>Post old photos, captions and reactions.</p></div>
+      <div class="card composer">
+        <div class="composer-head"><span id="composerAvatar" class="avatar"></span><button id="composerOpen" class="composer-input">Share a throwback...</button></div>
+        <div class="composer-actions"><label class="attach"><span>▧</span> Photos<input id="memoryPhotos" type="file" accept="image/*" multiple hidden></label><button id="composerPost" class="primary small-btn">Post</button></div>
+        <div id="memoryComposerPanel" class="composer-panel hidden"><input id="memoryCaption" maxlength="180" placeholder="Write a caption..."><div id="memoryPreview" class="photo-preview"></div></div>
+      </div>
+      <div id="memoryFeed" class="feed"></div>
+    </section>
+
+    <section id="puzzle" class="screen"><div class="page-title"><span class="eyebrow">MULTIPLAYER</span><h1>50-Word Puzzle</h1><p>Invite 1–4 friends. Take turns finding one hidden word every 15 seconds.</p></div><div id="puzzleMount"></div></section>
+
+    <section id="notifications" class="screen"><div class="page-title"><span class="eyebrow">ACTIVITY</span><h1>Notifications</h1><p>Reactions, quiz plays, friend requests and messages.</p></div><div id="notificationList" class="notification-list"></div></section>
+
+    <section id="messages" class="screen"><div class="page-title"><span class="eyebrow">PRIVATE CHAT</span><h1>Messages</h1><p>Chat with people you've connected with.</p></div><div class="card form-card"><label>Message someone<input id="messageTo" maxlength="24" placeholder="username"></label><div id="messageThread" class="message-thread"><div class="empty">Choose a username to start chatting.</div></div><div id="typingIndicator" class="typing-indicator hidden">● ● ● <span>typing…</span></div><div class="message-compose"><label class="attach-btn" title="Send image">▧<input id="messageImage" type="file" accept="image/*" hidden></label><button class="attach-btn" id="voiceBtn" title="Record voice">🎙</button><input id="messageText" maxlength="2000" placeholder="Write a message…"><button class="primary" id="sendMessage">Send</button></div></div></section>
+
+    <div class="ad-wrap" data-ad-slot="premium"><span>Advertisement</span><div class="ad-slot" id="ad-premium"></div></div>
+
+    <section id="creator" class="screen"><div class="page-title"><span class="eyebrow">CREATOR CENTER</span><h1>Build your creator business</h1><p>Publish premium puzzle packs, grow your audience, discover creators and manage your creator business.</p></div><div id="creatorMount"></div><div class="section-head"><h2>Creator Social Network</h2><button class="secondary small-btn" onclick="loadCreatorSocial()">Refresh</button></div><div id="creatorSocialMount"></div><div class="section-head"><h2>Creator Studio</h2><button class="secondary small-btn" onclick="loadCreatorStudio()">Refresh</button></div><div id="creatorStudioMount"></div></section>
+
+    <section id="admin" class="screen"><div class="page-title"><span class="eyebrow">ADMIN CENTER</span><h1>Platform control</h1><p>Users, moderation, live games, word bank, economy and announcements.</p></div><div id="adminStats" class="admin-grid"></div><div class="admin-tabs"><button class="active" data-admin-tab="dashboard">Overview</button><button data-admin-tab="users">Users</button><button data-admin-tab="reports">Reports</button><button data-admin-tab="games">Live games</button><button data-admin-tab="words">Word bank</button><button data-admin-tab="economy">Economy</button><button data-admin-tab="ads">Ads</button><button data-admin-tab="revenue">Revenue</button><button data-admin-tab="launch">Launch</button><button data-admin-tab="announcements">Announcements</button><button data-admin-tab="appeals">Appeals</button><button data-admin-tab="creators">Creators</button><button data-admin-tab="payouts">Payouts</button></div><div id="adminPanel" class="admin-panel"></div><div class="card form-card" style="margin-top:12px"><button class="secondary full" id="backupBtn">Create database backup</button></div></section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button data-go="home">⌂<span>Home</span></button>
+    <button data-go="discover">⌕<span>Discover</span></button>
+    <button class="create-nav" data-go="create">＋<span>Quiz</span></button>
+    <button data-go="memory">▣<span>Memories</span></button>
+    <button data-go="profile">◉<span>Me</span></button>
+  </nav>
+</div>
+
+<div id="searchSheet" class="sheet hidden"><div class="sheet-backdrop"></div><div class="sheet-panel"><div class="sheet-handle"></div><div class="sheet-head"><b>Search WHO SABI ME?</b><button id="closeSearch">×</button></div><div class="search-box"><span>⌕</span><input id="globalSearch" placeholder="Search people..." autocomplete="off"></div><div id="globalSearchResults"></div></div></div>
+<div id="editModal" class="modal hidden"><div class="modal-card"><div class="sheet-head"><b>Edit profile</b><button id="closeEdit">×</button></div><label>Display name<input id="editName"></label><label>Bio<textarea id="editBio" maxlength="160"></textarea></label><button class="primary full" id="saveEdit">Save changes</button></div></div>
+<div id="authModal" class="modal hidden"><div class="modal-card auth-card"><div class="sheet-head"><b id="authTitle">Sign in</b><button id="closeAuth">×</button></div><p id="authSubtitle" class="small muted">Sign in to sync your WHO SABI ME? profile across devices.</p><div id="authFields"><label>Email<input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"></label><label>Password<input id="authPassword" type="password" autocomplete="current-password" placeholder="At least 8 characters"></label><label id="authUsernameLabel" class="hidden">Username<input id="authUsername" maxlength="24" placeholder="yourusername" autocomplete="username"></label></div><button class="primary full" id="authSubmit">Sign in</button><button class="secondary full" id="authSwitch" style="margin-top:8px">Create an account</button><button class="secondary full hidden" id="authLogout" style="margin-top:8px">Sign out</button><button class="secondary full" id="resetPasswordBtn" style="margin-top:8px">Forgot password?</button><button class="secondary full" id="verifyEmailBtn" style="margin-top:8px">Verify email</button><button class="secondary full" id="securityBtn" style="margin-top:8px">🔐 Account security</button><p id="authStatus" class="small muted" style="margin-top:10px"></p></div></div><div id="storyModal" class="modal hidden"><div class="modal-card story-modal"><div class="sheet-head"><b>Create a 24-hour story</b><button id="closeStory">×</button></div><p class="small muted">Share a photo that disappears after 24 hours.</p><label class="story-file-label">Choose photo<input id="storyFile" type="file" accept="image/*" hidden><span id="storyFileName">No photo selected</span></label><img id="storyUploadPreview" class="story-upload-preview hidden" alt="Preview"><label>Caption<input id="storyCaption" maxlength="180" placeholder="Say something..."></label><button class="primary full" id="publishStory">Publish story</button></div></div><div id="storyViewer" class="modal hidden"><div class="story-viewer"><button id="closeStoryViewer" class="story-close">×</button><div id="storyViewerContent"></div></div></div><div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
