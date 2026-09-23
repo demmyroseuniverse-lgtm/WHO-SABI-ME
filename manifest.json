@@ -1,0 +1,11 @@
+{
+  "name": "WHO SABI ME?",
+  "short_name": "WHO SABI ME?",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f5fb",
+  "theme_color": "#6d28d9",
+  "description": "WHO SABI ME? \u2014 social quizzes, memories and 24-hour stories",
+  "icons": [],
+  "version": "36.0.0"
+}

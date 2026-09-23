@@ -1,0 +1,14 @@
+{
+  "name": "who-sabi-me-web",
+  "version": "0.40.0",
+  "private": true,
+  "description": "WHO SABI ME? v38 owner revenue dashboard, launch checks, payments and ads",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check storage.js && node --check app.js && node --check postgres-storage.js && node --check realtime.js",
+    "health": "node -e \"fetch(\"http://127.0.0.1:${PORT:-8080}/api/health\").then(r=>r.json()).then(x=>{console.log(JSON.stringify(x,null,2));process.exit(x.ok?0:1)}).catch(e=>{console.error(e);process.exit(1)})\""
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

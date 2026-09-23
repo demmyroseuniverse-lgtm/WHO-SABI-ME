@@ -1,0 +1,5 @@
+# Optional reverse proxy/TLS example. Point your DNS A/AAAA records at this server.
+YOUR-DOMAIN.example {
+    encode gzip
+    reverse_proxy app:8080
+}
